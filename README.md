@@ -18,7 +18,7 @@ compile 'me.zhouzhuo.zzhttp:zz-http:1.0.0'
 </dependency>
 ```
 <br/>
-<h1>How to use it ?
+<h1>How to use it ?<h1/>
 
 Don't forget adding perimssions.
 ```xml
@@ -84,7 +84,7 @@ public class Api {
 ```
 
 <br/>
-<h3>GET
+<h3>GET</h3>
 <br/>
 ① **return String**
 <br/>
@@ -134,7 +134,7 @@ Api.getWeatherApi()
                 });
 ```
 <br/>
-<h3>POST
+<h3>POST</h3>
 <br/>
 ①**return String**
 <br/>
@@ -182,7 +182,7 @@ Api.getWeatherApi()
                 });
 ```
 <br/>
-<h3>Download
+<h3>Download</h3>
 <br/>
 ```
         final String fileName = new File(filePath1).getName();
@@ -207,7 +207,7 @@ Api.getWeatherApi()
 
 ```
 <br/>
-<h3>Upload（multipart/form-data）
+<h3>Upload（multipart/form-data）</h3>
 <br/>
 ```
         ZzHttp.getInstance()
