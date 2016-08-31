@@ -18,7 +18,7 @@ compile 'me.zhouzhuo.zzhttp:zz-http:1.0.0'
 </dependency>
 ```
 <br/>
-<h1>How to use it ?<h1/>
+<h1>How to use it ?</h1>
 
 Don't forget adding perimssions.
 ```xml
