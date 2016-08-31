@@ -17,16 +17,16 @@ compile 'me.zhouzhuo.zzhttp:zz-http:1.0.0'
   <type>pom</type>
 </dependency>
 ```
-
-<h2>How to use it ?
+<br/>
+<h1>How to use it ?
 
 Don't forget adding perimssions.
-```
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+```xml
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 ```
 
-
+<br/>
 If you want to see log info in logcat.
 ```java
 public class MyApplication extends Application {
@@ -39,14 +39,14 @@ public class MyApplication extends Application {
     }
 }
 ```
-
+<br/>
 If there if only one baseUrl.
 
 ```java
 ZzHttp.getInstance().setBaseUrl("http://api.k780.com:88/")
 ```
 
-
+<br/>
 If there is two or more baseUrl.
 
 ```java
@@ -84,10 +84,10 @@ public class Api {
 ```
 
 <br/>
-<h3>**GET** 
-
-① return String
-
+<h3>GET
+<br/>
+① **return String**
+<br/>
 ```java
 Api.getWeatherApi()
                 .get(new HttpParams()
@@ -109,9 +109,9 @@ Api.getWeatherApi()
                     }
                 });
 ```
-
-②return Object
-
+<br/>
+②**return Object**
+<br/>
 ```java
         Api.getWeatherApi()
                 .get(new HttpParams()
@@ -134,10 +134,10 @@ Api.getWeatherApi()
                 });
 ```
 <br/>
-<h3>**POST**
-
-①return String
-
+<h3>POST
+<br/>
+①**return String**
+<br/>
 ```
 Api.getWeatherApi()
                 .post(new HttpParams()
@@ -158,9 +158,9 @@ Api.getWeatherApi()
                     }
                 });
 ```
-
-②return Object
-
+<br/>
+②**return Object**
+<br/>
 ```
         Api.getWeatherApi()
                 .post(new HttpParams()
@@ -182,8 +182,8 @@ Api.getWeatherApi()
                 });
 ```
 <br/>
-<h3>**Download**
-
+<h3>Download
+<br/>
 ```
         final String fileName = new File(filePath1).getName();
         String url = "http://192.168.1.102/test/image/" + fileName;
@@ -207,8 +207,8 @@ Api.getWeatherApi()
 
 ```
 <br/>
-<h3>**Upload（multipart/form-data）**
-
+<h3>Upload（multipart/form-data）
+<br/>
 ```
         ZzHttp.getInstance()
                 .setBaseUrl("http://192.168.1.102/")
