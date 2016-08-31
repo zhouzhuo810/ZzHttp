@@ -138,7 +138,7 @@ Api.getWeatherApi()
 <br/>
 ①**return String**
 <br/>
-```
+```java
 Api.getWeatherApi()
                 .post(new HttpParams()
                         .addStringParam("app", "weather.today")
@@ -161,7 +161,7 @@ Api.getWeatherApi()
 <br/>
 ②**return Object**
 <br/>
-```
+```java
         Api.getWeatherApi()
                 .post(new HttpParams()
                         .addStringParam("app", "weather.today")
@@ -184,7 +184,7 @@ Api.getWeatherApi()
 <br/>
 <h3>Download</h3>
 <br/>
-```
+```java
         final String fileName = new File(filePath1).getName();
         String url = "http://192.168.1.102/test/image/" + fileName;
         final String dir = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "test";
@@ -209,7 +209,7 @@ Api.getWeatherApi()
 <br/>
 <h3>Upload（multipart/form-data）</h3>
 <br/>
-```
+```java
         ZzHttp.getInstance()
                 .setBaseUrl("http://192.168.1.102/")
                 .post("test/test.php", new HttpParams()
