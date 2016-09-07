@@ -718,7 +718,7 @@ public class ZzHttp implements HttpManager {
                 os.write(bufferOut, 0, bytes);
                 current += bytes;
                 if (listener != null) {
-                    listener.progress(current * 1.0f / count, current, count);
+                    listener.progress(current * 100.0f / count, current, count);
                 }
             }
             is.close();
