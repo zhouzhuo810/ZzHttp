@@ -25,7 +25,7 @@ import me.zhouzhuo.zzhttp.model.HttpManager;
 import me.zhouzhuo.zzhttp.model.HttpMethod;
 import me.zhouzhuo.zzhttp.params.HttpParams;
 import me.zhouzhuo.zzhttp.utils.IOUtils;
-import me.zhouzhuo.zzhttp.utils.Logger;
+import me.zhouzhuo.zzhttp.utils.ZzLogger;
 
 /**
  * Created by zz on 2016/8/29.
@@ -63,9 +63,9 @@ public class ZzHttp implements HttpManager {
 
     public static void setDebug(boolean debug) {
         if (debug)
-            Logger.on();
+            ZzLogger.on();
         else
-            Logger.off();
+            ZzLogger.off();
     }
 
     @Override
@@ -101,7 +101,7 @@ public class ZzHttp implements HttpManager {
                 HttpURLConnection urlConnection = null;
                 try {
                     URL url = new URL(baseUrl + File.separator + mPath.toString());
-                    Logger.d(url.toString());
+                    ZzLogger.d(url.toString());
                     urlConnection = (HttpURLConnection) url.openConnection();
                     urlConnection.setRequestMethod(HttpMethod.GET.toString());
                     urlConnection.setRequestProperty("Content-Type", "text/plain; charset=utf-8");
@@ -130,7 +130,7 @@ public class ZzHttp implements HttpManager {
                 super.onPostExecute(entity);
                 switch (entity.getType()) {
                     case ResultEntity.TYPE_SUCCESS:
-                        Logger.d(entity.getResult());
+                        ZzLogger.d(entity.getResult());
                         if (callback != null) {
                             if (callback instanceof Callback.ZzCallback) {
                                 if (t != null && !t.getName().equals(String.class.getName())) {
@@ -144,7 +144,7 @@ public class ZzHttp implements HttpManager {
                         }
                         break;
                     case ResultEntity.TYPE_FAILURE:
-                        Logger.e(entity.getResult());
+                        ZzLogger.e(entity.getResult());
                         if (callback != null) {
                             if (callback instanceof Callback.ZzCallback) {
                                 ((Callback.ZzCallback) callback).onFailure(entity.getResult());
@@ -152,7 +152,7 @@ public class ZzHttp implements HttpManager {
                         }
                         break;
                     case ResultEntity.TYPE_PROGRESS:
-                        Logger.d(entity.getResult());
+                        ZzLogger.d(entity.getResult());
                         if (callback != null) {
                             if (callback instanceof Callback.ProgressUploadCallback) {
                                 ((Callback.ProgressUploadCallback) callback).onProgress(entity.getProgress(), entity.getCurrentSize(), entity.getTotalSize());
@@ -200,7 +200,7 @@ public class ZzHttp implements HttpManager {
 
                 try {
                     URL url = new URL(baseUrl + mPath);
-                    Logger.d(url.toString());
+                    ZzLogger.d(url.toString());
                     urlConnection = (HttpURLConnection) url.openConnection();
                     urlConnection.setRequestMethod(HttpMethod.POST.toString());
                     urlConnection.setDoOutput(true);
@@ -217,11 +217,12 @@ public class ZzHttp implements HttpManager {
                     urlConnection.connect();
 
                     os = new DataOutputStream(urlConnection.getOutputStream());
+                    final ResultEntity resultEntity = new ResultEntity(ResultEntity.TYPE_PROGRESS, null);
                     if (params != null && params.length > 0 && params[0] != null) {
                         writeOutStream(params[0], os, new OnProgressUpdateListener() {
                             @Override
                             public void progress(float progress, int currentSize, int totalSize) {
-                                publishProgress(new ResultEntity(ResultEntity.TYPE_PROGRESS, null).setProgress(progress).setCurrentSize(currentSize).setTotalSize(totalSize));
+                                publishProgress(resultEntity.setProgress(progress).setCurrentSize(currentSize).setTotalSize(totalSize));
                             }
                         });
                     }
@@ -261,7 +262,7 @@ public class ZzHttp implements HttpManager {
                 super.onPostExecute(entity);
                 switch (entity.getType()) {
                     case ResultEntity.TYPE_SUCCESS:
-                        Logger.d(entity.getResult());
+                        ZzLogger.d(entity.getResult());
                         if (callback != null) {
                             if (callback instanceof Callback.ZzCallback) {
                                 if (t != null && !t.getName().equals(String.class.getName())) {
@@ -275,7 +276,7 @@ public class ZzHttp implements HttpManager {
                         }
                         break;
                     case ResultEntity.TYPE_FAILURE:
-                        Logger.e(entity.getResult());
+                        ZzLogger.e(entity.getResult());
                         if (callback != null) {
                             if (callback instanceof Callback.ZzCallback) {
                                 ((Callback.ZzCallback) callback).onFailure(entity.getResult());
@@ -315,7 +316,7 @@ public class ZzHttp implements HttpManager {
                 HttpURLConnection urlConnection = null;
                 try {
                     URL url = new URL(baseUrl + File.separator + mPath.toString());
-                    Logger.d(url.toString());
+                    ZzLogger.d(url.toString());
                     urlConnection = (HttpURLConnection) url.openConnection();
                     urlConnection.setRequestMethod(HttpMethod.GET.toString());
                     urlConnection.setRequestProperty("Content-Type", "text/plain; charset=utf-8");
@@ -344,7 +345,7 @@ public class ZzHttp implements HttpManager {
                 super.onPostExecute(entity);
                 switch (entity.getType()) {
                     case ResultEntity.TYPE_SUCCESS:
-                        Logger.d(entity.getResult());
+                        ZzLogger.d(entity.getResult());
                         if (callback != null) {
                             if (callback instanceof Callback.ZzCallback) {
                                 if (t != null && !t.getName().equals(String.class.getName())) {
@@ -358,7 +359,7 @@ public class ZzHttp implements HttpManager {
                         }
                         break;
                     case ResultEntity.TYPE_FAILURE:
-                        Logger.e(entity.getResult());
+                        ZzLogger.e(entity.getResult());
                         if (callback != null) {
                             if (callback instanceof Callback.ZzCallback) {
                                 ((Callback.ZzCallback) callback).onFailure(entity.getResult());
@@ -453,7 +454,7 @@ public class ZzHttp implements HttpManager {
                 HttpURLConnection urlConnection = null;
                 try {
                     URL mUrl = new URL(url);
-                    Logger.d(mUrl.toString());
+                    ZzLogger.d(mUrl.toString());
                     urlConnection = (HttpURLConnection) mUrl.openConnection();
                     urlConnection.setRequestMethod(HttpMethod.GET.toString());
                     urlConnection.setRequestProperty("User-Agent", "Dalvik/2.1.0 (Linux; U; Android 5.0.2; Letv X500 Build/DBXCNOP5501304131S)");
@@ -472,11 +473,11 @@ public class ZzHttp implements HttpManager {
                     int currentSize = 0;
                     int temp = 0;
                     byte[] buf = new byte[1024];
+                    final ResultEntity resultEntity = new ResultEntity(ResultEntity.TYPE_PROGRESS, null);
                     while ((temp = is.read(buf)) != -1) {
                         currentSize += temp;
                         out.write(buf, 0, temp);
-                        publishProgress(new ResultEntity(ResultEntity.TYPE_PROGRESS, null)
-                                .setProgress(currentSize * 100.0f / file_leng).setCurrentSize(currentSize).setTotalSize(file_leng));
+                        publishProgress(resultEntity.setProgress(currentSize * 100.0f / file_leng).setCurrentSize(currentSize).setTotalSize(file_leng));
                     }
                     is.close();
                     out.flush();
@@ -507,7 +508,7 @@ public class ZzHttp implements HttpManager {
                 super.onPostExecute(entity);
                 switch (entity.getType()) {
                     case ResultEntity.TYPE_SUCCESS:
-                        Logger.d(entity.getResult());
+                        ZzLogger.d(entity.getResult());
                         if (callback != null) {
                             if (callback instanceof Callback.ZzCallback) {
                                 ((Callback.ZzCallback) callback).onSuccess(entity.getResult());
@@ -515,7 +516,7 @@ public class ZzHttp implements HttpManager {
                         }
                         break;
                     case ResultEntity.TYPE_FAILURE:
-                        Logger.e(entity.getResult());
+                        ZzLogger.e(entity.getResult());
                         if (callback != null) {
                             if (callback instanceof Callback.ZzCallback) {
                                 ((Callback.ZzCallback) callback).onFailure(entity.getResult());
@@ -548,7 +549,7 @@ public class ZzHttp implements HttpManager {
 
                 try {
                     URL url = new URL(baseUrl + mPath);
-                    Logger.d(url.toString());
+                    ZzLogger.d(url.toString());
                     urlConnection = (HttpURLConnection) url.openConnection();
                     urlConnection.setRequestMethod(HttpMethod.POST.toString());
                     urlConnection.setDoOutput(true);
@@ -565,11 +566,12 @@ public class ZzHttp implements HttpManager {
                     urlConnection.connect();
 
                     os = new DataOutputStream(urlConnection.getOutputStream());
+                    final ResultEntity resultEntity = new ResultEntity(ResultEntity.TYPE_PROGRESS, null);
                     if (params != null && params.length > 0 && params[0] != null) {
                         writeOutStream(params[0], os, new OnProgressUpdateListener() {
                             @Override
                             public void progress(float progress, int currentSize, int totalSize) {
-                                publishProgress(new ResultEntity(ResultEntity.TYPE_PROGRESS, null).setProgress(progress).setCurrentSize(currentSize).setTotalSize(totalSize));
+                                publishProgress(resultEntity.setProgress(progress).setCurrentSize(currentSize).setTotalSize(totalSize));
                             }
                         });
                     }
@@ -609,7 +611,7 @@ public class ZzHttp implements HttpManager {
                 super.onPostExecute(entity);
                 switch (entity.getType()) {
                     case ResultEntity.TYPE_SUCCESS:
-                        Logger.d(entity.getResult());
+                        ZzLogger.d(entity.getResult());
                         if (callback != null) {
                             if (callback instanceof Callback.ZzCallback) {
                                 if (t != null && !t.getName().equals(String.class.getName())) {
@@ -623,7 +625,7 @@ public class ZzHttp implements HttpManager {
                         }
                         break;
                     case ResultEntity.TYPE_FAILURE:
-                        Logger.e(entity.getResult());
+                        ZzLogger.e(entity.getResult());
                         if (callback != null) {
                             if (callback instanceof Callback.ZzCallback) {
                                 ((Callback.ZzCallback) callback).onFailure(entity.getResult());

@@ -26,7 +26,7 @@ public class IOUtils {
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-            Logger.e(ex.getMessage());
+            ZzLogger.e(ex.getMessage());
         } finally {
             closeIO(is);
         }
@@ -45,7 +45,7 @@ public class IOUtils {
                 }
                 cb.close();
             } catch (IOException e) {
-                Logger.e(e.getMessage());
+                ZzLogger.e(e.getMessage());
             }
         }
     }

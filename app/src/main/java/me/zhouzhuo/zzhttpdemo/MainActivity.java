@@ -19,7 +19,7 @@ import java.io.File;
 import me.zhouzhuo.zzhttp.ZzHttp;
 import me.zhouzhuo.zzhttp.callback.Callback;
 import me.zhouzhuo.zzhttp.params.HttpParams;
-import me.zhouzhuo.zzhttp.utils.Logger;
+import me.zhouzhuo.zzhttp.utils.ZzLogger;
 import me.zhouzhuo.zzhttpdemo.api.Api;
 import me.zhouzhuo.zzhttpdemo.bean.UploadEntity;
 import me.zhouzhuo.zzhttpdemo.bean.WeatherEntity;
@@ -59,8 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void getDataFromNetwork() {
         //get string
-/*        ZzHttp.getInstance()
-                .setBaseUrl("http://api.k780.com:88/")
+/*      Api.getWeatherApi()
                 .get(new HttpParams()
                         .addStringParam("app", "weather.today")
                         .addStringParam("weaid", "1")
@@ -82,8 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //post string
-/*        ZzHttp.getInstance()
-                .setBaseUrl("http://api.k780.com:88/")
+/*        Api.getWeatherApi()
                 .post(new HttpParams()
                         .addStringParam("app", "weather.today")
                         .addStringParam("weaid", "1")
@@ -178,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
         String img_path_four = actualimagecursorFour.getString(actual_image_column_index_four);
         actualimagecursorFour.close();
         filePath1 = img_path_four;
-        Logger.e(filePath1);
+        ZzLogger.e(filePath1);
     }
 
 
