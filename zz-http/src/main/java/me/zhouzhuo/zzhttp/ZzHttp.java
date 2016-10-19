@@ -73,7 +73,7 @@ public class ZzHttp implements HttpManager {
         doGetWithPath(path, params, t, callback);
     }
 
-    private <T> void doGetWithPath(String path, HttpParams params, final Class<T> t, final Callback callback) {
+    private <T> void doGetWithPath(final String path, HttpParams params, final Class<T> t, final Callback callback) {
         new AsyncTask<HttpParams, Void, ResultEntity>() {
             @Override
             protected ResultEntity doInBackground(HttpParams... params) {
@@ -100,7 +100,7 @@ public class ZzHttp implements HttpManager {
                 }
                 HttpURLConnection urlConnection = null;
                 try {
-                    URL url = new URL(baseUrl + File.separator + mPath.toString());
+                    URL url = new URL(baseUrl == null ? "" : baseUrl + path + File.separator + mPath.toString());
                     ZzLogger.d(url.toString());
                     urlConnection = (HttpURLConnection) url.openConnection();
                     urlConnection.setRequestMethod(HttpMethod.GET.toString());
@@ -199,7 +199,7 @@ public class ZzHttp implements HttpManager {
                 }
 
                 try {
-                    URL url = new URL(baseUrl + mPath);
+                    URL url = new URL(baseUrl == null ? "" : baseUrl + mPath);
                     ZzLogger.d(url.toString());
                     urlConnection = (HttpURLConnection) url.openConnection();
                     urlConnection.setRequestMethod(HttpMethod.POST.toString());
