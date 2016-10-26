@@ -4,7 +4,7 @@ A http framework for simply GET and POST.
 **Gradle**
 
 ```
-compile 'me.zhouzhuo.zzhttp:zz-http:1.0.3'
+compile 'me.zhouzhuo.zzhttp:zz-http:1.0.4'
 ```
 
 **Maven**
@@ -13,7 +13,7 @@ compile 'me.zhouzhuo.zzhttp:zz-http:1.0.3'
 <dependency>
   <groupId>me.zhouzhuo.zzhttp</groupId>
   <artifactId>zz-http</artifactId>
-  <version>1.0.3</version>
+  <version>1.0.4</version>
   <type>pom</type>
 </dependency>
 ```
