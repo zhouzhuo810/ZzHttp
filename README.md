@@ -17,8 +17,8 @@ compile 'me.zhouzhuo.zzhttp:zz-http:1.0.4'
   <type>pom</type>
 </dependency>
 ```
-<br/>
-<h1>How to use it ?</h1>
+
+# How to use it ?
 
 Don't forget adding perimssions.
 ```xml
@@ -26,7 +26,7 @@ Don't forget adding perimssions.
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 ```
 
-<br/>
+
 If you want to see log info in logcat.
 ```java
 public class MyApplication extends Application {
@@ -39,14 +39,14 @@ public class MyApplication extends Application {
     }
 }
 ```
-<br/>
+
 If there if only one baseUrl.
 
 ```java
 ZzHttp.getInstance().setBaseUrl("http://api.k780.com:88/")
 ```
 
-<br/>
+
 If there is two or more baseUrl.
 
 ```java
@@ -83,11 +83,10 @@ public class Api {
 
 ```
 
-<br/>
-<h3>GET</h3>
-<br/>
+### GET
+
 ① **return String**
-<br/>
+
 ```java
 Api.getWeatherApi()
                 .get(new HttpParams()
@@ -109,9 +108,9 @@ Api.getWeatherApi()
                     }
                 });
 ```
-<br/>
+
 ②**return Object**
-<br/>
+
 ```java
         Api.getWeatherApi()
                 .get(new HttpParams()
@@ -133,11 +132,11 @@ Api.getWeatherApi()
                     }
                 });
 ```
-<br/>
-<h3>POST</h3>
-<br/>
+
+### POST
+
 ①**return String**
-<br/>
+
 ```java
 Api.getWeatherApi()
                 .post(new HttpParams()
@@ -158,9 +157,9 @@ Api.getWeatherApi()
                     }
                 });
 ```
-<br/>
+
 ②**return Object**
-<br/>
+
 ```java
         Api.getWeatherApi()
                 .post(new HttpParams()
@@ -181,9 +180,9 @@ Api.getWeatherApi()
                     }
                 });
 ```
-<br/>
-<h3>Download</h3>
-<br/>
+
+### Download
+
 ```java
         final String fileName = new File(filePath1).getName();
         String url = "http://192.168.1.102/test/image/" + fileName;
@@ -206,9 +205,9 @@ Api.getWeatherApi()
         });
 
 ```
-<br/>
-<h3>Upload（multipart/form-data）</h3>
-<br/>
+
+### Upload（multipart/form-data）
+
 ```java
         ZzHttp.getInstance()
                 .setBaseUrl("http://192.168.1.102/")
